@@ -75,6 +75,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-el-dropdown-bug" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/06/el-dropdown-bug/" class="article-date">
+  <time class="dt-published" datetime="2024-05-06T06:36:35.927Z" itemprop="datePublished">2024-05-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/06/el-dropdown-bug/">elementPlus el-dropdown组件popperjs本地报警告</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>用 vue3+elementPlus 结果使用 el-dropdown 组件时报警告了。<br>Popper: Detected CSS transitions on at least one of the following CSS properties: “transform”, “top”, “right”, “bottom”, “left”.</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-dropdown</span><br><span class="line">          v-for=<span class="string">&quot;(item, i) in operateBtns&quot;</span></span><br><span class="line">          :key=<span class="string">&quot;item.code&quot;</span></span><br><span class="line">          trigger=<span class="string">&quot;click&quot;</span></span><br><span class="line">          :popper-options=<span class="string">&quot;&#123;</span></span><br><span class="line"><span class="string">            modifiers: [</span></span><br><span class="line"><span class="string">              &#123;</span></span><br><span class="line"><span class="string">                name: &#x27;computeStyles&#x27;,</span></span><br><span class="line"><span class="string">                options: &#123; gpuAcceleration: false, adaptive: false &#125;,</span></span><br><span class="line"><span class="string">              &#125;,</span></span><br><span class="line"><span class="string">            ],</span></span><br><span class="line"><span class="string">          &#125;&quot;</span></span><br><span class="line">        &gt;</span><br></pre></td></tr></table></figure>
+
+<p>添加上 adaptive: false 属性就可以了。在 Popper.js 中，adaptive 属性是用于修饰符 computeStyles 的一个选项，用于控制 Popper 元素的定位方式。当 adaptive 设置为 true 时，Popper 元素会根据视口的大小和位置自动调整其位置，以确保其在视口内可见。换句话说，Popper 元素会自适应视口的大小和位置，以避免被遮挡或溢出视口。</p>
+<p>如果您禁用了 adaptive 选项，Popper 元素将不再自适应视口，而是保持固定的位置。这在某些情况下可能会导致 Popper 元素在视口边缘溢出或被遮挡。</p>
+<p>因此，根据您的需求和设计，您可以根据具体情况来决定是否使用 adaptive 选项来控制 Popper 元素的定位方式。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/06/el-dropdown-bug/" data-id="clvulsj6v0000w4sz1x9601w5" data-title="elementPlus el-dropdown组件popperjs本地报警告" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-text-chosed-operate" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/06/text-chosed-operate/" class="article-date">
@@ -113,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/06/text-chosed-operate/" data-id="clvujtjbw000078szc0pkdd48" data-title="vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/06/text-chosed-operate/" data-id="clvulsj710001w4sz3938atq7" data-title="vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -154,6 +198,10 @@
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/05/06/el-dropdown-bug/">elementPlus el-dropdown组件popperjs本地报警告</a>
+          </li>
         
           <li>
             <a href="/2024/05/06/text-chosed-operate/">vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容</a>
