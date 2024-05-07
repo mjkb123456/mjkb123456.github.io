@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性 | 盘的技术博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="实现手动滑动滑块改变图片旋转角度，如果图片角度为 5 度左右则验证通过，可以进行下一步操作。 组件代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879">
+<meta property="og:type" content="article">
+<meta property="og:title" content="写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性">
+<meta property="og:url" content="http://example.com/2024/05/07/pic-rotate-valid/index.html">
+<meta property="og:site_name" content="盘的技术博客">
+<meta property="og:description" content="实现手动滑动滑块改变图片旋转角度，如果图片角度为 5 度左右则验证通过，可以进行下一步操作。 组件代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-07T07:49:59.716Z">
+<meta property="article:modified_time" content="2024-05-07T07:56:49.979Z">
+<meta property="article:author" content="Pan">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="盘的技术博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">盘的技术博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">前端技术记录</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-pic-rotate-valid" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/07/pic-rotate-valid/" class="article-date">
+  <time class="dt-published" datetime="2024-05-07T07:49:59.716Z" itemprop="datePublished">2024-05-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>实现手动滑动滑块改变图片旋转角度，如果图片角度为 5 度左右则验证通过，可以进行下一步操作。</p>
+<h2 id="组件代码"><a href="#组件代码" class="headerlink" title="组件代码"></a>组件代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=<span class="string">&quot;con&quot;</span>&gt;</span><br><span class="line">    &lt;el-icon @click=<span class="string">&quot;emits(&#x27;goBack&#x27;)&quot;</span>&gt;&lt;Close /&gt;&lt;/el-icon&gt;</span><br><span class="line">    &lt;h5&gt;安全验证&lt;/h5&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;desc&quot;</span>&gt;请完成下方验证后继续操作&lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;pic&quot;</span>&gt;</span><br><span class="line">      &lt;img :style=<span class="string">&quot;imageStyle&quot;</span> :src=<span class="string">&quot;ai1&quot;</span> alt=<span class="string">&quot;Rotatable Image&quot;</span> /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;div</span><br><span class="line">      ref=<span class="string">&quot;sliderConRef&quot;</span></span><br><span class="line">      class=<span class="string">&quot;slider-container&quot;</span></span><br><span class="line">      @mouseup=<span class="string">&quot;stopDrag&quot;</span></span><br><span class="line">      @mousemove=<span class="string">&quot;drag&quot;</span></span><br><span class="line">    &gt;</span><br><span class="line">      &lt;span class=<span class="string">&quot;txt&quot;</span> @mouseup=<span class="string">&quot;stopDrag&quot;</span> @mousemove=<span class="string">&quot;drag&quot;</span>&gt;</span><br><span class="line">        拖动左侧滑块使图片为正</span><br><span class="line">      &lt;/span&gt;</span><br><span class="line">      &lt;div</span><br><span class="line">        ref=<span class="string">&quot;sliderRef&quot;</span></span><br><span class="line">        class=<span class="string">&quot;slider&quot;</span></span><br><span class="line">        :style=<span class="string">&quot;sliderStyle&quot;</span></span><br><span class="line">        @mousedown=<span class="string">&quot;startDrag&quot;</span></span><br><span class="line">        @mouseup=<span class="string">&quot;stopDrag&quot;</span></span><br><span class="line">        @mousemove=<span class="string">&quot;drag&quot;</span></span><br><span class="line">      /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=<span class="string">&quot;ts&quot;</span> setup&gt;</span><br><span class="line">  import &#123; computed, ref &#125; from <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line">  import ai1 from <span class="string">&#x27;@/assets/img/home/ai-1.png?url&#x27;</span>;</span><br><span class="line">  import &#123; ElMessage &#125; from <span class="string">&#x27;element-plus&#x27;</span>;</span><br><span class="line">  import &#123; useElementSize, useMouse, useMouseInElement &#125; from <span class="string">&#x27;@vueuse/core&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  const emits = defineEmits([<span class="string">&#x27;goBack&#x27;</span>, <span class="string">&#x27;submitOver&#x27;</span>]);</span><br><span class="line">  const sliderConRef = ref(null);</span><br><span class="line">  const sliderRef = ref(null);</span><br><span class="line">  const dragging = ref(<span class="literal">false</span>);</span><br><span class="line">  const startX = ref(0);</span><br><span class="line">  const delta = ref(0);</span><br><span class="line">  const degreeRange = 0.5;</span><br><span class="line">  const degreeBase = 77;</span><br><span class="line">  const rotation = ref(</span><br><span class="line">    -Math.floor((Math.random() * degreeRange + degreeRange) * degreeBase),</span><br><span class="line">  );</span><br><span class="line">  const &#123; width: sliderConW &#125; = useElementSize(sliderConRef);</span><br><span class="line">  const &#123; width: sliderW &#125; = useElementSize(sliderRef);</span><br><span class="line">  const maxDelta = computed(() =&gt; sliderConW.value - sliderW.value - <span class="number">4</span>);</span><br><span class="line">  const minDelta = <span class="number">0</span>;</span><br><span class="line">  const &#123; isOutside &#125; = useMouseInElement(sliderConRef);</span><br><span class="line"></span><br><span class="line">  const startDrag = (event: MouseEvent) =&gt; &#123;</span><br><span class="line">    if (Math.abs(rotation.value) &lt; <span class="number">5</span>) &#123;</span><br><span class="line">      ElMessage.success(&#x27;验证成功&#x27;);</span><br><span class="line">      emits(&#x27;submitOver&#x27;);</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    dragging.value = true;</span><br><span class="line">    startX.value = event.clientX;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  const stopDrag = () =&gt; &#123;</span><br><span class="line">    if (!dragging.value) &#123;</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    dragging.value = false;</span><br><span class="line"></span><br><span class="line">    if (Math.abs(rotation.value) &lt; <span class="number">5</span>) &#123;</span><br><span class="line">      ElMessage.success(&#x27;验证成功&#x27;);</span><br><span class="line">      emits(&#x27;submitOver&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  const drag = (event: MouseEvent) =&gt; &#123;</span><br><span class="line">    if (isOutside.value) &#123;</span><br><span class="line">      dragging.value = false;</span><br><span class="line">    &#125;</span><br><span class="line">    if (dragging.value) &#123;</span><br><span class="line">      const currentX = event.clientX;</span><br><span class="line">      const distance = currentX - startX.value;</span><br><span class="line">      delta.value += distance;</span><br><span class="line">      if (delta.value &gt;= maxDelta.value) &#123;</span><br><span class="line">        delta.value = maxDelta.value;</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line">      if (delta.value &lt;= minDelta) &#123;</span><br><span class="line">        delta.value = minDelta;</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line">      rotation.value += distance * <span class="number">0.5</span>; // Sensitivity</span><br><span class="line">      startX.value = currentX;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  const imageStyle = computed(() =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      transform: `rotateZ(<span class="variable">$&#123;rotation.value&#125;</span>deg)`,</span><br><span class="line">      transition: &#x27;transform <span class="number">0.05</span>s ease&#x27;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  const sliderStyle = computed(() =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      transform: `translateX(<span class="variable">$&#123;delta.value&#125;</span>px)`,</span><br><span class="line">      transition: &#x27;transform <span class="number">0.05</span>s ease&#x27;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=&quot;scss&quot; scoped&gt;</span><br><span class="line">  .con &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    width: <span class="number">480</span>px;</span><br><span class="line">    height: <span class="number">480</span>px;</span><br><span class="line">    margin: auto;</span><br><span class="line">    border-radius: <span class="number">6</span>px;</span><br><span class="line">    text-align: center;</span><br><span class="line">    background: linear-gradient(<span class="number">180</span>deg, #<span class="number">2</span>b2b2b <span class="number">0</span>%, #<span class="number">111</span> <span class="number">100</span>%);</span><br><span class="line"></span><br><span class="line">    h5 &#123;</span><br><span class="line">      font-size: <span class="number">32</span>px;</span><br><span class="line">      padding: <span class="number">45</span>px <span class="number">0</span> <span class="number">18</span>px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .desc &#123;</span><br><span class="line">      font-size: <span class="number">14</span>px;</span><br><span class="line">      margin-bottom: <span class="number">16</span>px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .pic &#123;</span><br><span class="line">      width: <span class="number">180</span>px;</span><br><span class="line">      height: <span class="number">180</span>px;</span><br><span class="line">      border-radius: <span class="number">50</span>%;</span><br><span class="line">      margin: auto;</span><br><span class="line">      overflow: hidden;</span><br><span class="line"></span><br><span class="line">      img &#123;</span><br><span class="line">        object-fit: cover;</span><br><span class="line">        height: <span class="number">100</span>%;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .el-icon &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    font-size: <span class="number">20</span>px;</span><br><span class="line">    opacity: <span class="number">0.5</span>;</span><br><span class="line">    top: <span class="number">20</span>px;</span><br><span class="line">    right: <span class="number">20</span>px;</span><br><span class="line">    cursor: pointer;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .slider-container &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    width: <span class="number">380</span>px;</span><br><span class="line">    margin: <span class="number">40</span>px auto <span class="number">0</span>;</span><br><span class="line">    height: <span class="number">64</span>px;</span><br><span class="line">    border-radius: <span class="number">32</span>px;</span><br><span class="line">    background-color: #<span class="number">222</span>;</span><br><span class="line">    display: flex;</span><br><span class="line">    align-items: center;</span><br><span class="line">    justify-content: center;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .slider &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    left: <span class="number">3</span>px;</span><br><span class="line">    bottom: <span class="number">3</span>px;</span><br><span class="line">    height: <span class="number">58</span>px;</span><br><span class="line">    width: <span class="number">58</span>px;</span><br><span class="line">    cursor: pointer;</span><br><span class="line">    background-image: url(&#x27;@/assets/img/slider.png&#x27;);</span><br><span class="line">    background-repeat: no-repeat;</span><br><span class="line">    background-size: cover;</span><br><span class="line">    background-position: center;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .txt &#123;</span><br><span class="line">    font-size: <span class="number">16</span>px;</span><br><span class="line">    opacity: <span class="number">0.3</span>;</span><br><span class="line">    user-select: none;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  img &#123;</span><br><span class="line">    width: <span class="number">100</span>%;</span><br><span class="line">    object-fit: contain;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .light &#123;</span><br><span class="line">    .con &#123;</span><br><span class="line">      background: linear-gradient(<span class="number">180</span>deg, #b0b0b0 <span class="number">0</span>%, #<span class="number">6</span>e6e6e <span class="number">100</span>%);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .slider-container &#123;</span><br><span class="line">      background-color: #e7e3e3;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以按照自身需求修改图片旋转的随机角度等，可以再次优化实现代码，不优化也可以直接用了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/07/pic-rotate-valid/" data-id="clvw3ku2000005ksz1avh7i4f" data-title="写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/05/06/el-dropdown-bug/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">elementPlus el-dropdown组件popperjs本地报警告</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/05/07/pic-rotate-valid/">写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/06/el-dropdown-bug/">elementPlus el-dropdown组件popperjs本地报警告</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/06/text-chosed-operate/">vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Pan<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
