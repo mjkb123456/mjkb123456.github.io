@@ -75,6 +75,46 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-teleport-bug" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/10/teleport-bug/" class="article-date">
+  <time class="dt-published" datetime="2024-05-10T06:14:52.148Z" itemprop="datePublished">2024-05-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/10/teleport-bug/">记录使用vue3 Teleport报错的bug</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>使用 Teleport 项目直接报错了，报错如下：<br>Uncaught (in promise) DOMException: Failed to execute ‘insertBefore’ on ‘Node’: The node before which the new node is to be inserted is not a child of this node.</p>
+<h2 id="原因及解决方法"><a href="#原因及解决方法" class="headerlink" title="原因及解决方法"></a>原因及解决方法</h2><p>Teleport 的目标容器不在当前组件的根节点下：<br>Teleport 的目标容器必须在当前组件的根节点下，否则可能会出现错误。请确保 Teleport 的目标容器在当前组件的根节点下。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/10/teleport-bug/" data-id="clw0ad4ld0002j8sz4stddlzo" data-title="记录使用vue3 Teleport报错的bug" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-pic-rotate-valid" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/07/pic-rotate-valid/" class="article-date">
@@ -105,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/07/pic-rotate-valid/" data-id="clvw3ku2000005ksz1avh7i4f" data-title="写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/07/pic-rotate-valid/" data-id="clw0ad4lb0001j8szbehz6boe" data-title="写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -149,7 +189,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/06/el-dropdown-bug/" data-id="clvw3ku2900015ksz8re4f6pr" data-title="elementPlus el-dropdown组件popperjs本地报警告" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/06/el-dropdown-bug/" data-id="clw0ad4l40000j8szgql59u8h" data-title="elementPlus el-dropdown组件popperjs本地报警告" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -199,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/06/text-chosed-operate/" data-id="clvw3ku2i00025ksz5e1b8tyx" data-title="vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/06/text-chosed-operate/" data-id="clw0ad4le0003j8sz0tgb9w06" data-title="vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -240,6 +280,10 @@
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/05/10/teleport-bug/">记录使用vue3 Teleport报错的bug</a>
+          </li>
         
           <li>
             <a href="/2024/05/07/pic-rotate-valid/">写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性</a>
