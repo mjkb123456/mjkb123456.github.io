@@ -75,6 +75,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-load-process" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/17/load-process/" class="article-date">
+  <time class="dt-published" datetime="2024-05-17T02:09:34.143Z" itemprop="datePublished">2024-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/17/load-process/">实现一个假的加载进度条</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本地上传图片或者文件时，加载进度条可以让用户体验稍微提升一些。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> <span class="keyword">function</span> useProgressBar(progressBarCon: HTMLDivElement): void &#123;</span><br><span class="line">  progressBarCon.style.display = <span class="string">&#x27;block&#x27;</span>;</span><br><span class="line">  const progressBar = progressBarCon.querySelector(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">  <span class="built_in">let</span> width = 0;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="function"><span class="title">move</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> (width &gt;= 100) &#123;</span><br><span class="line">      clearInterval(interval);</span><br><span class="line"></span><br><span class="line">      progressBarCon.style.display = <span class="string">&#x27;none&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      width++;</span><br><span class="line">      <span class="keyword">if</span> (progressBar) progressBar.style.width = width + <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  const interval = setInterval(move, 10);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useProgressBar(progressBarRef.value);</span><br></pre></td></tr></table></figure>
+
+<p>progressBarRef.value 为进度条的 dom 元素。</p>
+<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div ref=<span class="string">&quot;progressBarRef&quot;</span> class=<span class="string">&quot;progress&quot;</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;progress-bar&quot;</span> /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="css"><a href="#css" class="headerlink" title="css"></a>css</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  .progress &#123;</span><br><span class="line">    display: none;</span><br><span class="line">    width: 110px;</span><br><span class="line">    height: 2px;</span><br><span class="line">    background: rgb(255 255 255 / 10%);</span><br><span class="line">    border-radius: 1px;</span><br><span class="line">    margin-left: 15px;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .progress-bar &#123;</span><br><span class="line">    width: 0%;</span><br><span class="line">    height: 100%;</span><br><span class="line">    background: <span class="comment">#61ece4;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/17/load-process/" data-id="clwa1ro9i0000scszcu7egem6" data-title="实现一个假的加载进度条" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-vue-teleport-bug" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/10/vue-teleport-bug/" class="article-date">
@@ -103,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/10/vue-teleport-bug/" data-id="clw0ax4kl0003d0sz0r9kabnd" data-title="记录使用vue3 Teleport报错的bug" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/10/vue-teleport-bug/" data-id="clwa1ro9v0004scsze95y734y" data-title="记录使用vue3 Teleport报错的bug" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -145,7 +192,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/07/pic-rotate-valid/" data-id="clw0ax4ke0001d0sz0e0u43bz" data-title="写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/07/pic-rotate-valid/" data-id="clwa1ro9q0002scsz33tuelif" data-title="写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -189,7 +236,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/06/el-dropdown-bug/" data-id="clw0ax4k80000d0sz50j3fdrf" data-title="elementPlus el-dropdown组件popperjs本地报警告" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/06/el-dropdown-bug/" data-id="clwa1ro9o0001scsz22i9hijg" data-title="elementPlus el-dropdown组件popperjs本地报警告" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -239,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/06/text-chosed-operate/" data-id="clw0ax4kk0002d0szdjgn1428" data-title="vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/06/text-chosed-operate/" data-id="clwa1ro9r0003scszhzla1zus" data-title="vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -280,6 +327,10 @@
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/05/17/load-process/">实现一个假的加载进度条</a>
+          </li>
         
           <li>
             <a href="/2024/05/10/vue-teleport-bug/">记录使用vue3 Teleport报错的bug</a>
