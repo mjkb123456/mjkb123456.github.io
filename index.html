@@ -75,6 +75,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-svg-icon" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/22/svg-icon/" class="article-date">
+  <time class="dt-published" datetime="2024-05-22T02:29:11.576Z" itemprop="datePublished">2024-05-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/22/svg-icon/">实现svg图标直接用css样式更改颜色</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>主题色分深色或者浅色时，有时候 icon 需要自己设计添加进来，这时候如果配合不同主题色，如果不能通过 css 样式 color 属性动态修改颜色，就得切图两个图标，然后写切换逻辑很麻烦。所以可以通过修改 svg 编码让其根据 color 属性动态修改颜色。</p>
+<h2 id="svg-编码"><a href="#svg-编码" class="headerlink" title="svg 编码"></a>svg 编码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;svg</span><br><span class="line">    xmlns=<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span></span><br><span class="line">    xmlns:xlink=<span class="string">&quot;http://www.w3.org/1999/xlink&quot;</span></span><br><span class="line">    width=<span class="string">&quot;20px&quot;</span></span><br><span class="line">    height=<span class="string">&quot;20px&quot;</span></span><br><span class="line">    viewBox=<span class="string">&quot;0 0 20 20&quot;</span></span><br><span class="line">    version=<span class="string">&quot;1.1&quot;</span></span><br><span class="line">  &gt;</span><br><span class="line">    &lt;title&gt;编组 18&lt;/title&gt;</span><br><span class="line">    &lt;g</span><br><span class="line">      <span class="built_in">id</span>=<span class="string">&quot;输入框修改&quot;</span></span><br><span class="line">      stroke=<span class="string">&quot;none&quot;</span></span><br><span class="line">      stroke-width=<span class="string">&quot;1&quot;</span></span><br><span class="line">      fill=<span class="string">&quot;none&quot;</span></span><br><span class="line">      fill-rule=<span class="string">&quot;evenodd&quot;</span></span><br><span class="line">    &gt;</span><br><span class="line">      &lt;g <span class="built_in">id</span>=<span class="string">&quot;已执行修改效果&quot;</span> transform=<span class="string">&quot;translate(-1253, -409)&quot;</span>&gt;</span><br><span class="line">        &lt;g <span class="built_in">id</span>=<span class="string">&quot;编组-5&quot;</span> transform=<span class="string">&quot;translate(1078, 393)&quot;</span>&gt;</span><br><span class="line">          &lt;g <span class="built_in">id</span>=<span class="string">&quot;编组-18&quot;</span> transform=<span class="string">&quot;translate(175, 16)&quot;</span>&gt;</span><br><span class="line">            &lt;rect <span class="built_in">id</span>=<span class="string">&quot;矩形备份-20&quot;</span> x=<span class="string">&quot;0&quot;</span> y=<span class="string">&quot;0&quot;</span> width=<span class="string">&quot;20&quot;</span> height=<span class="string">&quot;20&quot;</span> /&gt;</span><br><span class="line">            &lt;g <span class="built_in">id</span>=<span class="string">&quot;编组-17备份&quot;</span>&gt;</span><br><span class="line">              &lt;rect <span class="built_in">id</span>=<span class="string">&quot;矩形备份-18&quot;</span> x=<span class="string">&quot;0&quot;</span> y=<span class="string">&quot;0&quot;</span> width=<span class="string">&quot;20&quot;</span> height=<span class="string">&quot;20&quot;</span> /&gt;</span><br><span class="line">              &lt;g</span><br><span class="line">                <span class="built_in">id</span>=<span class="string">&quot;编组-16&quot;</span></span><br><span class="line">                transform=<span class="string">&quot;translate(1, 3)&quot;</span></span><br><span class="line">                stroke=<span class="string">&quot;currentColor&quot;</span></span><br><span class="line">                stroke-linecap=<span class="string">&quot;round&quot;</span></span><br><span class="line">                stroke-width=<span class="string">&quot;1.3&quot;</span></span><br><span class="line">              &gt;</span><br><span class="line">                &lt;line <span class="built_in">id</span>=<span class="string">&quot;路径-3&quot;</span> x1=<span class="string">&quot;0&quot;</span> y1=<span class="string">&quot;0.5&quot;</span> x2=<span class="string">&quot;18&quot;</span> y2=<span class="string">&quot;0.5&quot;</span> /&gt;</span><br><span class="line">                &lt;polyline</span><br><span class="line">                  <span class="built_in">id</span>=<span class="string">&quot;路径-3备份-2&quot;</span></span><br><span class="line">                  points=<span class="string">&quot;5.76835039 13 4 14.7683504 18.5 14.7683504&quot;</span></span><br><span class="line">                /&gt;</span><br><span class="line">                &lt;line <span class="built_in">id</span>=<span class="string">&quot;路径-3备份&quot;</span> x1=<span class="string">&quot;6.5&quot;</span> y1=<span class="string">&quot;7&quot;</span> x2=<span class="string">&quot;18&quot;</span> y2=<span class="string">&quot;7&quot;</span> /&gt;</span><br><span class="line">              &lt;/g&gt;</span><br><span class="line">            &lt;/g&gt;</span><br><span class="line">          &lt;/g&gt;</span><br><span class="line">        &lt;/g&gt;</span><br><span class="line">      &lt;/g&gt;</span><br><span class="line">    &lt;/g&gt;</span><br><span class="line">  &lt;/svg&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我们需要切图 svg 图标，然后改属性，把写死的颜色改为 currentColor，改完了就可以直接引用图标了。</p>
+<h2 id="图标引用"><a href="#图标引用" class="headerlink" title="图标引用"></a>图标引用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import rsIcon from <span class="string">&#x27;./components/rsIcon.vue&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>直接 import 引用就可以使用了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/22/svg-icon/" data-id="clwh7rv1f0002hwsz412hbiyf" data-title="实现svg图标直接用css样式更改颜色" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-load-process" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/17/load-process/" class="article-date">
@@ -110,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/17/load-process/" data-id="clwa1ro9i0000scszcu7egem6" data-title="实现一个假的加载进度条" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/17/load-process/" data-id="clwh7rv1e0001hwsz5s2sbrzc" data-title="实现一个假的加载进度条" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -150,7 +195,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/10/vue-teleport-bug/" data-id="clwa1ro9v0004scsze95y734y" data-title="记录使用vue3 Teleport报错的bug" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/10/vue-teleport-bug/" data-id="clwh7rv1h0004hwsz7wzv5tzv" data-title="记录使用vue3 Teleport报错的bug" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -192,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/07/pic-rotate-valid/" data-id="clwa1ro9q0002scsz33tuelif" data-title="写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/07/pic-rotate-valid/" data-id="clwh7rv1g0003hwsz17v96kv2" data-title="写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -236,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/06/el-dropdown-bug/" data-id="clwa1ro9o0001scsz22i9hijg" data-title="elementPlus el-dropdown组件popperjs本地报警告" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/06/el-dropdown-bug/" data-id="clwh7rv180000hwsz80qabpft" data-title="elementPlus el-dropdown组件popperjs本地报警告" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -286,7 +331,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/06/text-chosed-operate/" data-id="clwa1ro9r0003scszhzla1zus" data-title="vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/06/text-chosed-operate/" data-id="clwh7rv1i0005hwsz7hcx07mc" data-title="vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -329,6 +374,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/22/svg-icon/">实现svg图标直接用css样式更改颜色</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/17/load-process/">实现一个假的加载进度条</a>
           </li>
         
@@ -342,10 +391,6 @@
         
           <li>
             <a href="/2024/05/06/el-dropdown-bug/">elementPlus el-dropdown组件popperjs本地报警告</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/06/text-chosed-operate/">vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容</a>
           </li>
         
       </ul>
