@@ -75,6 +75,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-text-show-part" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/07/10/text-show-part/" class="article-date">
+  <time class="dt-published" datetime="2024-07-10T05:43:35.990Z" itemprop="datePublished">2024-07-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/07/10/text-show-part/">实现文本查看，超出几行省略号展示，可展开收缩</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>文本阅读如果文本很多，需要展示一部分，然后点击展开，展示全部，点击收起。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- eslint-disable vue/no-v-html --&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div v-if=<span class="string">&quot;item.content&quot;</span> class=<span class="string">&quot;introduce-content-con&quot;</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">&quot;content-con&quot;</span>&gt;</span><br><span class="line">      &lt;div</span><br><span class="line">        ref=<span class="string">&quot;contentRef&quot;</span></span><br><span class="line">        class=<span class="string">&quot;content&quot;</span></span><br><span class="line">        :style=<span class="string">&quot;&#123;</span></span><br><span class="line"><span class="string">          &#x27;-webkit-line-clamp&#x27;: isExpanded ? &#x27;unset&#x27; : &#x27;5&#x27;</span></span><br><span class="line"><span class="string">        &#125;&quot;</span></span><br><span class="line">        v-html=<span class="string">&quot;item.content&quot;</span></span><br><span class="line">      /&gt;</span><br><span class="line">      &lt;el-row v-if=<span class="string">&quot;showExpandBtn&quot;</span> justify=<span class="string">&quot;center&quot;</span>&gt;</span><br><span class="line">        &lt;el-button</span><br><span class="line">          class=<span class="string">&quot;expand-btn&quot;</span></span><br><span class="line">          text</span><br><span class="line">          <span class="built_in">type</span>=<span class="string">&quot;primary&quot;</span></span><br><span class="line">          @click=<span class="string">&quot;isExpanded = !isExpanded&quot;</span></span><br><span class="line">        &gt;</span><br><span class="line">          &#123;&#123; isExpanded ? <span class="string">&#x27;收起&#x27;</span> : <span class="string">&#x27;展开&#x27;</span> &#125;&#125;</span><br><span class="line">          &lt;el-icon v-show=<span class="string">&quot;!isExpanded&quot;</span>&gt;&lt;ArrowDown /&gt;&lt;/el-icon&gt;</span><br><span class="line">          &lt;el-icon v-show=<span class="string">&quot;isExpanded&quot;</span>&gt;&lt;ArrowUp /&gt;&lt;/el-icon&gt;</span><br><span class="line">        &lt;/el-button&gt;</span><br><span class="line">      &lt;/el-row&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=<span class="string">&quot;ts&quot;</span>&gt;</span><br><span class="line">  import &#123; onMounted, ref &#125; from <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  const props = defineProps&lt;&#123; item: any &#125;&gt;();</span><br><span class="line">  const contentRef = ref&lt;HTMLDivElement | null&gt;(null);</span><br><span class="line">  const isExpanded = ref(<span class="literal">false</span>);</span><br><span class="line">  const showExpandBtn = ref(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">  onMounted(() =&gt; &#123;</span><br><span class="line">    if (!props.item.content) &#123;</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    const containerHeight = parseInt(</span><br><span class="line">      window.getComputedStyle(contentRef.value!).getPropertyValue(&#x27;height&#x27;),</span><br><span class="line">    );</span><br><span class="line">    const textHeight = contentRef.value!.scrollHeight;</span><br><span class="line"></span><br><span class="line">    if (textHeight &gt; containerHeight) &#123;</span><br><span class="line">      showExpandBtn.value = true;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=&quot;scss&quot; scoped&gt;</span><br><span class="line">  .introduce-content-con &#123;</span><br><span class="line">    .title &#123;</span><br><span class="line">      padding: <span class="number">20</span>px <span class="number">0</span> <span class="number">12</span>px;</span><br><span class="line"></span><br><span class="line">      h3 &#123;</span><br><span class="line">        font-size: <span class="number">16</span>px;</span><br><span class="line">        font-weight: <span class="number">600</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      .el-button &#123;</span><br><span class="line">        font-size: <span class="number">14</span>px;</span><br><span class="line">        color: #<span class="number">6</span>fe4dd;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .content-con &#123;</span><br><span class="line">      box-sizing: border-box;</span><br><span class="line">      padding: <span class="number">20</span>px;</span><br><span class="line">      border-radius: <span class="number">8</span>px;</span><br><span class="line">      background: rgb(<span class="number">255</span> <span class="number">255</span> <span class="number">255</span> / <span class="number">10</span>%);</span><br><span class="line">      border: <span class="number">1</span>px solid rgb(<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> / <span class="number">20</span>%);</span><br><span class="line">      position: relative;</span><br><span class="line"></span><br><span class="line">      .content &#123;</span><br><span class="line">        font-size: <span class="number">16</span>px;</span><br><span class="line">        line-height: <span class="number">1.5</span>;</span><br><span class="line">        display: -webkit-box;</span><br><span class="line">        -webkit-line-clamp: <span class="number">5</span>; /* 显示的行数 */</span><br><span class="line">        line-clamp: <span class="number">5</span>;</span><br><span class="line">        -webkit-box-orient: vertical;</span><br><span class="line">        overflow: hidden;</span><br><span class="line">        transition: all <span class="number">0.3</span>s ease-out;</span><br><span class="line">        box-sizing: border-box;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      .expand-btn &#123;</span><br><span class="line">        font-size: <span class="number">16</span>px;</span><br><span class="line">        color: #<span class="number">6</span>fe4dd;</span><br><span class="line"></span><br><span class="line">        .el-icon &#123;</span><br><span class="line">          margin-left: <span class="number">8</span>px;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>主要靠样式控制行数显示数量，通过 <code>-webkit-line-clamp</code> 控制，然后通过 <code>isExpanded</code> 控制是否展开。是否显示展开按钮，通过 <code>showExpandBtn</code> 控制。初始化时，会用 js 判断是否需要展开按钮。通过获取样式高度和滚动高度，判断是否需要展开按钮。</p>
+<ol>
+<li><code>-webkit-line-clamp</code> 属性用于限制一个块元素显示的文本的行数。</li>
+<li><code>-webkit-box-orient</code> 属性用于设置或检索伸缩盒元素的子元素的排列方式。</li>
+<li><code>-webkit-box-orient: vertical</code> 属性用于设置或检索伸缩盒元素的子元素的排列方式。</li>
+<li><code>overflow: hidden</code> 属性用于设置或检索当内容溢出元素框时发生的事情。</li>
+<li><code>transition: all 0.3s ease-out</code> 属性用于设置或检索当元素过渡时发生的事情。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/07/10/text-show-part/" data-id="clyffkfyq0005s0szf2whhcl6" data-title="实现文本查看，超出几行省略号展示，可展开收缩" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-svg-icon" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/22/svg-icon/" class="article-date">
@@ -108,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/22/svg-icon/" data-id="clwh7rv1f0002hwsz412hbiyf" data-title="实现svg图标直接用css样式更改颜色" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/22/svg-icon/" data-id="clyffkfyj0004s0szharwbwup" data-title="实现svg图标直接用css样式更改颜色" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -155,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/17/load-process/" data-id="clwh7rv1e0001hwsz5s2sbrzc" data-title="实现一个假的加载进度条" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/17/load-process/" data-id="clyffkfy50000s0szdjnzdm2a" data-title="实现一个假的加载进度条" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -195,7 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/10/vue-teleport-bug/" data-id="clwh7rv1h0004hwsz7wzv5tzv" data-title="记录使用vue3 Teleport报错的bug" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/10/vue-teleport-bug/" data-id="clyffkfyr0006s0sz8fgv6njr" data-title="记录使用vue3 Teleport报错的bug" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -237,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/07/pic-rotate-valid/" data-id="clwh7rv1g0003hwsz17v96kv2" data-title="写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/07/pic-rotate-valid/" data-id="clyffkfyg0002s0szb09s3wkb" data-title="写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -281,7 +330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/06/el-dropdown-bug/" data-id="clwh7rv180000hwsz80qabpft" data-title="elementPlus el-dropdown组件popperjs本地报警告" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/06/el-dropdown-bug/" data-id="clyffkfyc0001s0szallw38jn" data-title="elementPlus el-dropdown组件popperjs本地报警告" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -331,7 +380,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/06/text-chosed-operate/" data-id="clwh7rv1i0005hwsz7hcx07mc" data-title="vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/06/text-chosed-operate/" data-id="clyffkfyh0003s0szbyas7bxo" data-title="vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -361,7 +410,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li></ul>
     </div>
   </div>
 
@@ -372,6 +421,10 @@
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/07/10/text-show-part/">实现文本查看，超出几行省略号展示，可展开收缩</a>
+          </li>
         
           <li>
             <a href="/2024/05/22/svg-icon/">实现svg图标直接用css样式更改颜色</a>
@@ -387,10 +440,6 @@
         
           <li>
             <a href="/2024/05/07/pic-rotate-valid/">写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/06/el-dropdown-bug/">elementPlus el-dropdown组件popperjs本地报警告</a>
           </li>
         
       </ul>
