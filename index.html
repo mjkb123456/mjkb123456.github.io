@@ -75,6 +75,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git-change" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/07/19/git-change/" class="article-date">
+  <time class="dt-published" datetime="2024-07-19T01:00:37.868Z" itemprop="datePublished">2024-07-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/07/19/git-change/">gitlab仓库迁移</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>迁移仓库的所有分支至新地址。</p>
+<h2 id="gitlab-仓库迁移"><a href="#gitlab-仓库迁移" class="headerlink" title="gitlab 仓库迁移"></a>gitlab 仓库迁移</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --mirror &lt;旧地址&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;上一步拉取的文件夹&gt;</span><br><span class="line">git remote set-url origin &lt;新地址&gt;</span><br><span class="line">git branch -m master main</span><br><span class="line">git branch master</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p>首先新建一个文件夹，打开 git bash，顺序执行上述命令。<br>如果不用改 main 分支名，就不需要第四步。这样执行完成就可以完成仓库迁移了。<br>当然，你得有仓库地址的迁移权限。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/07/19/git-change/" data-id="clys02zn100010gsz9y4wfrqp" data-title="gitlab仓库迁移" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-docx-preview" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/07/10/docx-preview/" class="article-date">
@@ -109,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/10/docx-preview/" data-id="clygm00cy0000s4sz21ef2zg3" data-title="vue3+ts实现docx文档预览功能" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/07/10/docx-preview/" data-id="clys02zmu00000gsz9wwj0vje" data-title="vue3+ts实现docx文档预览功能" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -158,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/10/text-show-part/" data-id="clygm00db0006s4sz3gehc2tv" data-title="实现文本查看，超出几行省略号展示，可展开收缩" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/07/10/text-show-part/" data-id="clys02zn500050gsz54eh83v1" data-title="实现文本查看，超出几行省略号展示，可展开收缩" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -203,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/22/svg-icon/" data-id="clygm00da0004s4sz6bl8b36j" data-title="实现svg图标直接用css样式更改颜色" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/22/svg-icon/" data-id="clys02zn600060gszer7obthw" data-title="实现svg图标直接用css样式更改颜色" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -250,7 +292,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/17/load-process/" data-id="clygm00d50001s4sz560d7kke" data-title="实现一个假的加载进度条" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/17/load-process/" data-id="clys02zn400030gszhxlx5j1m" data-title="实现一个假的加载进度条" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -290,7 +332,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/10/vue-teleport-bug/" data-id="clygm00dc0007s4sz23cf1y9f" data-title="记录使用vue3 Teleport报错的bug" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/10/vue-teleport-bug/" data-id="clys02znd00080gszaffs3mnf" data-title="记录使用vue3 Teleport报错的bug" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -332,7 +374,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/07/pic-rotate-valid/" data-id="clygm00d90003s4sz0trj1zne" data-title="写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/07/pic-rotate-valid/" data-id="clys02zn500040gszgkzsc1vh" data-title="写个组件，通过拖动底部滑块把图片角度摆正，以便验证用户属性" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -376,7 +418,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/06/el-dropdown-bug/" data-id="clygm00d80002s4sz3kvg1wkk" data-title="elementPlus el-dropdown组件popperjs本地报警告" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/06/el-dropdown-bug/" data-id="clys02zn300020gsz7p454v3w" data-title="elementPlus el-dropdown组件popperjs本地报警告" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -426,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/06/text-chosed-operate/" data-id="clygm00da0005s4sz45p43mhz" data-title="vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      <a data-url="http://example.com/2024/05/06/text-chosed-operate/" data-id="clys02znb00070gszfylf78z4" data-title="vue3+ts实现一个类，选中段落后自动弹出一排操作按钮来操作段落内容" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
       
       
       
@@ -469,6 +511,10 @@
       <ul>
         
           <li>
+            <a href="/2024/07/19/git-change/">gitlab仓库迁移</a>
+          </li>
+        
+          <li>
             <a href="/2024/07/10/docx-preview/">vue3+ts实现docx文档预览功能</a>
           </li>
         
@@ -482,10 +528,6 @@
         
           <li>
             <a href="/2024/05/17/load-process/">实现一个假的加载进度条</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/10/vue-teleport-bug/">记录使用vue3 Teleport报错的bug</a>
           </li>
         
       </ul>
